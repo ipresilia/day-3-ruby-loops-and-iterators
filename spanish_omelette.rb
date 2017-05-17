@@ -10,7 +10,7 @@ puts "\n"
 end
 
 
-# Defining Ingredients
+# Define Ingredients
 NUM_POTATOES = 5
 NUM_EGGS = 6
 
@@ -54,7 +54,7 @@ loop do
 end
 
 
-# Defining Recipe Steps
+# Define Recipe Steps
 steps = [
   { description: "Scrape potatoes", action: "scrape_potatoes" },
   { description: "Cut potatoes into thick slices", action: "cut_potatoes" },
@@ -128,4 +128,20 @@ def ask_if_ready(step, index)
   answer = gets.chomp
 
   answer.upcase == 'Y'
+end
+
+
+# Iterate through steps
+steps.each_with_index do |step, index|
+  print_divider
+
+  loop do
+    ready = ask_if_ready(step, index)
+    break if ready
+
+    puts "OK, I will give you some extra time."
+    print_progress_bar
+  end
+
+  send(step[:action])
 end
